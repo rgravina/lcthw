@@ -13,6 +13,7 @@ void die(const char* message) {
 }
 
 typedef int (*compare_cb)(int a, int b);
+typedef int *(*sort)(int *numbers, int count, compare_cb cmp);
 
 int *bubble_sort(int *numbers, int count, compare_cb cmp) {
   int temp = 0;
@@ -20,7 +21,7 @@ int *bubble_sort(int *numbers, int count, compare_cb cmp) {
   int j = 0;
   int *target = malloc(count * sizeof(int));
 
-  if(!target) die("Memort error");
+  if(!target) die("Memory error");
 
   memcpy(target, numbers, count * sizeof(int));
 
@@ -53,9 +54,9 @@ int strange_order(int a, int b) {
   }
 }
 
-void test_sorting(int *numbers, int count, compare_cb cmp) {
+void test_sorting(int *numbers, int count, sort sort, compare_cb cmp) {
   int i = 0;
-  int *sorted = bubble_sort(numbers, count, cmp);
+  int *sorted = sort(numbers, count, cmp);
 
   if(!sorted) die("Failed to sort as requested");
 
@@ -81,9 +82,9 @@ int main(int argc, char* argv[]) {
     numbers[i] = atoi(inputs[i]);
   }
 
-  test_sorting(numbers, count, sorted_order);
-  test_sorting(numbers, count, reverse_order);
-  test_sorting(numbers, count, strange_order);
+  test_sorting(numbers, count, bubble_sort, sorted_order);
+  test_sorting(numbers, count, bubble_sort, reverse_order);
+  test_sorting(numbers, count, bubble_sort, strange_order);
 
   free(numbers);
 
