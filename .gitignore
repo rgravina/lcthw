@@ -1,3 +1,7 @@
 ex17
+ex18
+
+.DS_Store
+
 # for ex17 which stores to a file
 *.db
