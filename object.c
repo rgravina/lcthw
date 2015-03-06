@@ -41,9 +41,9 @@ void *Object_new(size_t size, Object proto, char *description) {
   if(!proto.attack) proto.attack = Object_attack;
   if(!proto.move) proto.move = Object_move;
 
-  // Note: I don't quite understand this...
   // Make a struct of one size and them point a different pointer at to cast it.
   Object *el = calloc(1, size);
+  *el = proto;
 
   // copy description
   el->description = strdup(description);
