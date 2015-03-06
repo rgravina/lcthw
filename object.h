@@ -8,9 +8,9 @@ typedef enum {
 typedef struct {
   char *description;
   int (*init)(void *self);
-  int (*describe)(void *self);
-  int (*destroy)(void *self);
-  int *(*move)(void *self, Direction direction);
+  void (*describe)(void *self);
+  void (*destroy)(void *self);
+  void *(*move)(void *self, Direction direction);
   int (*attack)(void *self, int damage);
 } Object;
 

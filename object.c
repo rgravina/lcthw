@@ -48,7 +48,7 @@ void *Object_new(size_t size, Object proto, char *description) {
   // copy description
   el->description = strdup(description);
 
-  if(!e->init(el)) {
+  if(!el->init(el)) {
     // didin't initialise properly
     el->destroy(el);
     return NULL;
