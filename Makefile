@@ -1,4 +1,4 @@
 all:
-	gcc -std=c11 -Wall ex19.c object.c -o ex19
+	gcc -std=c11 -Wall ex20.c -o ex20
 clean:
-	rm -f ex19
+	rm -f ex20
