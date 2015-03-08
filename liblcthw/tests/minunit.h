@@ -3,7 +3,6 @@
 #define _minunit_h
 
 #include <stdio.h>
-#include <dbg.h>
 #include <stdlib.h>
 #include <lcthw/dbg.h>
 
