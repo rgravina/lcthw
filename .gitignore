@@ -4,6 +4,11 @@ ex19
 ex20
 
 .DS_Store
+*.o
+*.a
+*.log
+*.dSYM
+*.so
 
 # for ex17 which stores to a file
 *.db
