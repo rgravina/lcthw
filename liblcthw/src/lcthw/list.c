@@ -75,6 +75,7 @@ void *List_pop(List *list) {
   check(list, "list can't be NULL");
   ListNode *node = list->last;
   return node != NULL ? List_remove(list, node) : NULL;
+  check(list->count >= 0, "list count can't be negative.");
 error:
   return NULL;
 }
@@ -96,6 +97,7 @@ void List_unshift(List *list, void *value) {
   }
 
   list->count++;
+  check(list->count > 0 && list->first != NULL,  "list must contain something.");
 
 error:
   return;
@@ -105,7 +107,7 @@ void *List_shift(List *list) {
   check(list, "node can't be NULL");
   ListNode *node = list->first;
   return node != NULL ? List_remove(list, node) : NULL;
-
+  check(list->count >= 0, "list count can't be negative.");
 error:
   return NULL;
 }
