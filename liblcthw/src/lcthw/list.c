@@ -25,8 +25,18 @@ void List_clear(List *list) {
 
 
 void List_clear_destroy(List *list) {
-  List_clear(list);
-  List_destroy(list);
+  // This is a combined list clear and destroy
+  // More efficient than looping twice, but less
+  // readable than just calling List_clear then
+  // List_destroy/
+  LIST_FOREACH(list, first, next, cur) {
+    free(cur->value);
+    if(cur->prev) {
+        free(cur->prev);
+    }
+  }
+  free(list->last);
+  free(list);
 }
 
 
