@@ -6,6 +6,7 @@ List *List_create() {
 }
 
 void List_destroy(List *list) {
+  check(list, "list can't be NULL");
   LIST_FOREACH(list, first, next, cur) {
     if(cur->prev) {
         free(cur->prev);
@@ -14,13 +15,18 @@ void List_destroy(List *list) {
 
   free(list->last);
   free(list);
+error:
+  return;
 }
 
 
 void List_clear(List *list) {
+  check(list, "list can't be NULL");
   LIST_FOREACH(list, first, next, cur) {
     free(cur->value);
   }
+error:
+  return;
 }
 
 
@@ -29,6 +35,7 @@ void List_clear_destroy(List *list) {
   // More efficient than looping twice, but less
   // readable than just calling List_clear then
   // List_destroy/
+  check(list, "list can't be NULL");
   LIST_FOREACH(list, first, next, cur) {
     free(cur->value);
     if(cur->prev) {
@@ -37,10 +44,13 @@ void List_clear_destroy(List *list) {
   }
   free(list->last);
   free(list);
+error:
+  return;
 }
 
 
 void List_push(List *list, void *value) {
+  check(list, "list can't be NULL");
   ListNode *node = calloc(1, sizeof(ListNode));
   check_mem(node);
 
@@ -62,11 +72,15 @@ error:
 }
 
 void *List_pop(List *list) {
+  check(list, "list can't be NULL");
   ListNode *node = list->last;
   return node != NULL ? List_remove(list, node) : NULL;
+error:
+  return NULL;
 }
 
 void List_unshift(List *list, void *value) {
+  check(list, "list can't be NULL");
   ListNode *node = calloc(1, sizeof(ListNode));
   check_mem(node);
 
@@ -88,13 +102,18 @@ error:
 }
 
 void *List_shift(List *list) {
+  check(list, "node can't be NULL");
   ListNode *node = list->first;
   return node != NULL ? List_remove(list, node) : NULL;
+
+error:
+  return NULL;
 }
 
 void *List_remove(List *list, ListNode *node) {
   void *result = NULL;
 
+  check(list, "list can't be NULL");
   check(list->first && list->last, "List is empty.");
   check(node, "node can't be NULL");
 
